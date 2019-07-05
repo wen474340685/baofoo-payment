@@ -1,0 +1,19 @@
+{
+    "name": "moyang/baofu",
+    "description": "This is Baofoo Payment Api of baofoo version 4.0",
+    "type": "library",
+    "authors": [
+        {
+            "name": "moyang",
+            "email": "474340685@qq.com"
+        }
+    ],
+    "require": {
+		"php": ">=7.0.0"
+	},
+	"autoload": {
+        "psr-4": {
+            "Baofoo\\": "src/"
+        }
+	}
+}
