@@ -70,9 +70,9 @@ class BaofooApi
     private function __construct($merchantConfig)
     {
 		$this->api_version = $merchantConfig['api_version'] ?? $this->api_version;
-		$this->api_version_loan = $merchantConfig['api_version_loan'] ?? $this->api_version;
-		$this->api_version_query_balance = $merchantConfig['api_version_query_balance'] ?? $this->api_version;
-		$this->protocol_pay_url = $merchantConfig['protocol_pay_url'] ?? $this->api_version;
+		$this->api_version_loan = $merchantConfig['api_version_loan'] ?? $this->api_version_loan;
+		$this->api_version_query_balance = $merchantConfig['api_version_query_balance'] ?? $this->api_version_query_balance;
+		$this->protocol_pay_url = $merchantConfig['protocol_pay_url'] ?? $this->protocol_pay_url;
 		
         $this->merchant_id = $merchantConfig['merchant_id'];
         $this->terminal_id = $merchantConfig['terminal_id'];
