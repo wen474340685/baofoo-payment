@@ -70,9 +70,9 @@ class BaofooApi
     private function __construct($merchantConfig)
     {
 		$this->api_version = $merchantConfig['api_version'] ?? $this->api_version;
-		$this->api_version_loan = $merchantConfig['api_version_loan'] ?? $this->api_version;
-		$this->api_version_query_balance = $merchantConfig['api_version_query_balance'] ?? $this->api_version;
-		$this->protocol_pay_url = $merchantConfig['protocol_pay_url'] ?? $this->api_version;
+		$this->api_version_loan = $merchantConfig['api_version_loan'] ?? $this->api_version_loan;
+		$this->api_version_query_balance = $merchantConfig['api_version_query_balance'] ?? $this->api_version_query_balance;
+		$this->protocol_pay_url = $merchantConfig['protocol_pay_url'] ?? $this->protocol_pay_url;
 		
         $this->merchant_id = $merchantConfig['merchant_id'];
         $this->terminal_id = $merchantConfig['terminal_id'];
@@ -421,7 +421,6 @@ class BaofooApi
             throw new \Exception('缺少resp_code参数');
         }
         if ( $returnDataArr['resp_code'] == 'F' || isset($returnDataArr['resp_code']) && $returnDataArr['resp_code'] == 'FF') {
-            var_dump($returnDataArr);
             $biz_resp_code = isset($returnDataArr['biz_resp_code']) ? $returnDataArr['biz_resp_code'] : '';
             $biz_resp_msg = isset($returnDataArr['biz_resp_msg']) ? $returnDataArr['biz_resp_msg'] : '';
             throw new \Exception('失败：' . $biz_resp_msg . '(' . $biz_resp_code .')');
@@ -549,7 +548,7 @@ class BaofooApi
             return $this->apiReturnFormatting(
                 $decryptDataArr['trans_content']['trans_head']['return_code'],
                 $decryptDataArr['trans_content']['trans_head']['return_msg'],
-                array_column($decryptDataArr['trans_content']['trans_reqDatas'][0]['trans_reqData'], null, 'trans_no')
+                isset($decryptDataArr['trans_content']['trans_reqDatas'][0]['trans_reqData']) ? $decryptDataArr['trans_content']['trans_reqDatas'][0]['trans_reqData'] : []
             );
 
         } catch (\Exception $e) {
@@ -577,7 +576,7 @@ class BaofooApi
         return $this->apiReturnFormatting(
             $returnData['trans_head']['return_code'],
             $returnData['trans_head']['return_msg'],
-            isset($returnData['trans_reqDatas']['trans_reqData']) ? array_column($returnData['trans_reqDatas']['trans_reqData'], null, 'trans_orderid') : []
+            isset($returnData['trans_reqDatas']['trans_reqData']) ? $returnData['trans_reqDatas']['trans_reqData'] : []
         );
     }
 
