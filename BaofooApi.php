@@ -650,7 +650,7 @@ class BaofooApi
             return $this->apiReturnFormatting(
                 $returnData['trans_content']['trans_head']['return_code'],
                 $returnData['trans_content']['trans_head']['return_msg'],
-                isset($returnData['trans_content']['trans_reqDatas']['trans_reqData']) ? array_column($returnData['trans_content']['trans_reqDatas']['trans_reqData'], null, 'trans_orderid') : []
+                isset($returnData['trans_content']['trans_reqDatas']['trans_reqData']) ? $returnData['trans_content']['trans_reqDatas']['trans_reqData'] : []
             );
 
         } catch (\Exception $e) {
